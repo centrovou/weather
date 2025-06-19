@@ -87,9 +87,17 @@ const getCity = async (city) => {
 }
 
 @media (max-width: 450px) {
+  .wrapper {
+    padding: 0 15px;
+  }
   .right {
     width: 277px;
     padding: 25px 30px;
+    border-radius: 0px 0px 25px 25px;
+    row-gap: 10px;
+  }
+ .stat__items {
+    margin-bottom: 10px;
   }
 }
 </style>

@@ -82,6 +82,9 @@ const formatDate = (dateString) => {
     justify-content: space-between;
   }
 }
-
-
+@media (max-width: 450px) {
+  .stat__items {
+    margin-bottom: 12px;
+  }
+}
 </style>

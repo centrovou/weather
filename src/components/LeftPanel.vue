@@ -134,22 +134,29 @@ const weatherCode = computed(() => {
 
 @media (max-width: 450px) {
   .left {
+   border-radius: 10px 10px 0px 0px;
     width: 277px;
     height: 320px;
-    padding: 25px 30px;
+    padding: 1px 30px;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
   }
 
   .left__title-day {
     font-size: 20px;
   }
   .left__date {
-   font-size: 15px;
+    font-size: 15px;
   }
   .left__temp {
-    font-size: 35px;
+    font-size: 25px;
   }
   .left__textInfo {
-    font-size: 25px;
+    font-size: 15px;
+  }
+  .left__icon {
+    width: 50px;
   }
 }
 </style>

@@ -47,7 +47,7 @@ const { label = 'ноу', stat } = defineProps({
 
 @media (max-width: 450px) {
   .stat__name {
-    font-size: 15px;
+    font-size: 12px;
   }
   .stat__value {
     font-size: 15px;
