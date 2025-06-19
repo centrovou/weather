@@ -89,6 +89,7 @@ const getCity = async (city) => {
 @media (max-width: 450px) {
   .right {
     width: 277px;
+    padding: 25px 30px;
   }
 }
 </style>
