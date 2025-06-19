@@ -119,4 +119,16 @@ const weatherCode = computed(() => {
   font-weight: 700;
   line-height: normal;
 }
+
+@media (max-width: 1215px) {
+  .left {
+   height: 380px;
+  }
+}
+
+@media (max-width: 1070px) {
+  .left {
+   justify-content: space-between;
+  }
+}
 </style>

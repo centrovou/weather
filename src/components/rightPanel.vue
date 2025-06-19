@@ -76,4 +76,10 @@ const formatDate = (dateString) => {
   display: flex;
   flex-direction: column;
 }
+
+@media (max-width: 1070px) {
+  .days {
+    justify-content: space-between;
+  }
+}
 </style>

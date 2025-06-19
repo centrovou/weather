@@ -68,4 +68,21 @@ const getCity = async (city) => {
   padding: 50px 60px;
   border-radius: 0px 25px 25px 0px;
 }
+
+@media (max-width: 1215px) {
+  .wrapper {
+    display: block;
+  }
+  .right {
+    border-radius: 25px 25px 25px 25px;
+  }
+}
+
+@media (max-width: 1070px) {
+  .right {
+    display: flex;
+    flex-direction: column-reverse;
+    row-gap: 35px;
+  }
+}
 </style>

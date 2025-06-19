@@ -35,4 +35,13 @@ const { label = 'ноу', stat } = defineProps({
   column-gap: 5px;
   row-gap: 16px;
 }
+
+@media (max-width: 1070px) {
+  .stat__name {
+   font-size: 20px;
+  }
+  .stat__value {
+   font-size: 25px;
+  }
+}
 </style>

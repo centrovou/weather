@@ -88,4 +88,13 @@ const iconColor = computed(() => {
     color: var(--color-dark);
   }
 }
+
+@media (max-width: 1215px) {
+  .day__temp {
+    color: #fff;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
 </style>
