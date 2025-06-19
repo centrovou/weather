@@ -38,10 +38,19 @@ const { label = 'ноу', stat } = defineProps({
 
 @media (max-width: 1070px) {
   .stat__name {
-   font-size: 20px;
+    font-size: 20px;
   }
   .stat__value {
-   font-size: 25px;
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 450px) {
+  .stat__name {
+    font-size: 15px;
+  }
+  .stat__value {
+    font-size: 15px;
   }
 }
 </style>

@@ -122,13 +122,19 @@ const weatherCode = computed(() => {
 
 @media (max-width: 1215px) {
   .left {
-   height: 380px;
+    height: 380px;
   }
 }
 
 @media (max-width: 1070px) {
   .left {
-   justify-content: space-between;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 450px) {
+  .left {
+    width: 330px;
   }
 }
 </style>

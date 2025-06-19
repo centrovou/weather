@@ -85,4 +85,10 @@ const getCity = async (city) => {
     row-gap: 35px;
   }
 }
+
+@media (max-width: 450px) {
+  .right {
+    width: 277px;
+  }
+}
 </style>

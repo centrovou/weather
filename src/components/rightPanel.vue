@@ -82,4 +82,6 @@ const formatDate = (dateString) => {
     justify-content: space-between;
   }
 }
+
+
 </style>

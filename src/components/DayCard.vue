@@ -97,4 +97,12 @@ const iconColor = computed(() => {
     font-weight: 700;
   }
 }
+
+@media (max-width: 450px) {
+  .day__wrapper {
+    padding: 5px;
+    row-gap: 6px;
+    margin-bottom: 0px;
+  }
+}
 </style>

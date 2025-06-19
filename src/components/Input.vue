@@ -24,4 +24,13 @@ const data = defineModel({ type: String, required: true });
 .input::placeholder {
   color: #3f4958;
 }
+
+@media (max-width: 450px) {
+  .input {
+    max-width: 100px;
+  }
+  .input::placeholder {
+    font-size: 12px;
+  }
+}
 </style>
