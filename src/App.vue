@@ -5,6 +5,8 @@ import LeftPanel from './components/LeftPanel.vue';
 import RightPanel from './components/rightPanel.vue';
 
 import { API_ENDPOINT, cityProvide } from './const';
+import { db } from './firebase/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 let data = ref();
 const error = ref();
@@ -20,12 +22,12 @@ watch(city, () => {
 onMounted(() => {
   getCity(city.value);
 });
-
+const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
 const getCity = async (city) => {
   const params = new URLSearchParams({
     q: city,
     lang: 'ru',
-    key: '1fb86202199e4022ad0205736251606',
+    key: weatherApiKey,
     days: 4,
   });
   const res = await fetch(`${API_ENDPOINT}/forecast.json?${params.toString()}`);
@@ -96,7 +98,7 @@ const getCity = async (city) => {
     border-radius: 0px 0px 25px 25px;
     row-gap: 10px;
   }
- .stat__items {
+  .stat__items {
     margin-bottom: 10px;
   }
 }

@@ -15,6 +15,10 @@ const { weatherCode, temp, date, isActive } = defineProps({
 const iconColor = computed(() => {
   return isActive ? 'black' : 'white';
 });
+
+const tempRemeke = computed(() => {
+  return temp > 0 ? `+${Math.round(temp)}` : Math.round(temp);
+});
 </script>
 
 <template>
@@ -27,7 +31,7 @@ const iconColor = computed(() => {
     <div class="day__item">
       <span class="day__date">{{ date.toLocaleDateString('ru-RU', { weekday: 'short' }) }}</span>
       <span class="day__number">{{ nums }}</span>
-      <span class="day__temp">{{ temp }} °C</span>
+      <span class="day__temp">{{ tempRemeke }} °C</span>
     </div>
   </button>
 </template>
