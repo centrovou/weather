@@ -182,6 +182,8 @@ const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
     .left__panel {
         height: 450px;
         justify-content: space-between;
+        width: 468px;
+        padding: 40px 30px;
     }
 }
 </style>

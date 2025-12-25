@@ -79,7 +79,7 @@ const showIconSleet = computed(
   align-items: center;
   width: 100%;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.1s ease;
 }
 
 .active {

@@ -76,4 +76,14 @@ const statData = computed(() => {
   justify-content: space-between;
   gap: 1px;
 }
+
+@media (max-width: 1080px) {
+  .right__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 440px;
+    padding: 30px 23px;
+
+  }
+}
 </style>

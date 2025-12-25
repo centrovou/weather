@@ -163,4 +163,10 @@ function selectCity(cityInput) {
   background: rgba(31, 177, 121, 0.068);
   border-color: rgba(31, 177, 121, 0.171);
 }
+
+@media (max-width: 1080px) {
+  .dropdown {
+    width: 393px;
+  }
+}
 </style>
