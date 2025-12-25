@@ -15,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="wrapperr">
+  <div class="wrapper">
     <LeftPanel
       :city="forecastStore.city"
       :dayData="forecastStore.data?.forecast?.forecastday?.[activeIndex]"
@@ -30,7 +30,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.wrapperr {
+.wrapper {
   display: flex;
   align-items: center;
   padding: 20px;
