@@ -179,11 +179,42 @@ const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
 }
 
 @media (max-width: 1070px) {
-    .left__panel {
-        height: 450px;
-        justify-content: space-between;
-        width: 468px;
-        padding: 40px 30px;
-    }
+  .left__panel {
+    height: 450px;
+    justify-content: space-between;
+    width: 468px;
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .left__panel {
+    height: 385px;
+    justify-content: space-between;
+    width: 345px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .left__info {
+    font-size: 20px;
+  }
+  .left__buttom{
+   display: flex;
+   align-items: center;
+   text-align: center;
+  }
+  .left__city{
+   display: flex;
+   align-items: center;
+   text-align: center;
+   justify-content: center;
+  }
+  .left__date{
+   display: flex;
+   align-items: center;
+   text-align: center;
+   justify-content: center;
+  }
 }
 </style>

@@ -114,13 +114,34 @@ function selectCity(cityInput) {
   border: 1px solid #3a434f;
   z-index: 9999;
   max-height: 150px;
-  overflow-y: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
-  scrollbar-width: thin;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   scrollbar-color: #53a17d #1c2025;
 }
+/*  */
 
+/* Стилизация скроллбара для WebKit браузеров (Chrome, Safari, Edge) */
+.dropdown::-webkit-scrollbar {
+  width: 8px;
+  display: block !important; /* Важно: принудительное отображение */
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: #1c2025;
+  border-radius: 10px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: #53a17d;
+  border-radius: 10px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background: #3bf69f;
+}
+/*  */
 .drop-item {
   padding: 12px 20px;
   cursor: pointer;
@@ -166,7 +187,26 @@ function selectCity(cityInput) {
 
 @media (max-width: 1080px) {
   .dropdown {
-    width: 393px;
+    width: 302px;
+    overflow-y: scroll;
+    .dropdown::-webkit-scrollbar {
+      width: 8px;
+      display: block !important; /* Важно: принудительное отображение */
+    }
+
+    .dropdown::-webkit-scrollbar-track {
+      background: #1c2025;
+      border-radius: 10px;
+    }
+
+    .dropdown::-webkit-scrollbar-thumb {
+      background: #53a17d;
+      border-radius: 10px;
+    }
+
+    .dropdown::-webkit-scrollbar-thumb:hover {
+      background: #3bf69f;
+    }
   }
 }
 </style>

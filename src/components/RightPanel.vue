@@ -81,7 +81,7 @@ const statData = computed(() => {
   .right__wrapper {
     display: flex;
     flex-direction: column-reverse;
-    width: 440px;
+    width: 350px;
     padding: 30px 23px;
 
   }

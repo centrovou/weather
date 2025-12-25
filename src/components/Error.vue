@@ -24,4 +24,12 @@ defineProps({ error: String });
   margin-bottom: 410px;
   margin-top: -55px;
 }
+
+@media (max-width: 1070px) {
+  .wrapper__error {
+   margin-bottom: 410px;
+   margin-top: 45px;
+   border-radius: 10px;
+  }
+}
 </style>
