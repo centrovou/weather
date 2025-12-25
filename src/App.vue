@@ -35,7 +35,7 @@ onMounted(() => {
   align-items: center;
   padding: 20px;
 }
-@media (max-width: 1215px) {
+@media (max-width: 1080px) {
   .wrapper {
     display: flex;
     flex-direction: column-reverse;
