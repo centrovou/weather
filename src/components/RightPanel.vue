@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 import Stat from './Stat.vue';
 import DayCard from './DayCard.vue';
 import CityCelect from './cityCelect.vue';
@@ -9,43 +9,13 @@ import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-
 const { data, activeIndex, error } = defineProps({
   data: Object,
   activeIndex: Number,
   error: Object,
 });
 
-const errorMap = new Map([
-  [1006, 'Указанный город не найден'],
-  [1003, 'Введите город'],
-  [2006, 'Неправильный API-ключ'],
-]);
-
-const errorDisplay = computed(() => {
-  return errorMap.get(error?.error?.code);
-});
-
-const emit = defineEmits(['selectIndex']);
-
-const statData = computed(() => {
-  const dayData = data.forecast.forecastday[activeIndex].day;
-  return [
-    {
-      label: 'Влажность',
-      stat: dayData.avghumidity + ' %',
-    },
-    {
-      label: 'Дождь',
-      stat: dayData.daily_chance_of_rain + ' %',
-    },
-    {
-      label: 'ВЕТЕР',
-      stat: dayData.maxwind_kph + ' км/ч',
-    },
-  ];
-});
-
+// // // // // // // // // // // // // // // // // // // // // // // // //
 // Swiper модули
 const modules = [Navigation];
 
@@ -54,8 +24,8 @@ const swiperOptions = ref({
   slidesPerView: 3,
   spaceBetween: 10,
   navigation: {
-    nextEl: '.custom-button-next',
-    prevEl: '.custom-button-prev',
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
   },
   breakpoints: {
     // Настройки для разных размеров экрана
@@ -80,6 +50,7 @@ const swiperOptions = ref({
 
 // Обновляем активный слайд
 const onSwiper = (swiper) => {
+  // Можно сохранить инстанс swiper если нужно
   console.log('Swiper instance:', swiper);
 };
 
@@ -87,6 +58,38 @@ const onSwiper = (swiper) => {
 const onSlideChange = (swiper) => {
   console.log('Slide changed to:', swiper.activeIndex);
 };
+// // // // // // // // // // // // // // // // // // // // //
+const errorMap = new Map([
+  [1006, 'Указанный город не найден'],
+  [1003, 'Введите город'],
+  [2006, 'Неправильный API-ключ'],
+]);
+
+const errorDisplay = computed(() => {
+  return errorMap.get(error?.error?.code);
+});
+
+const emit = defineEmits(['selectIndex']);
+
+const statData = computed(() => {
+  const dayData = data.forecast.forecastday[activeIndex].day;
+  return [
+    {
+      label: 'Влажность',
+      stat: dayData.avghumidity + ' %',
+    },
+
+    {
+      label: 'Дождь',
+      stat: dayData.daily_chance_of_rain + ' %',
+    },
+
+    {
+      label: 'ВЕТЕР',
+      stat: dayData.maxwind_kph + ' км/ч',
+    },
+  ];
+});
 </script>
 
 <template>
@@ -99,30 +102,30 @@ const onSlideChange = (swiper) => {
 
     <!-- Swiper слайдер -->
     <div class="swiper-container" v-if="data">
-      <div class="swiper-wrapper-relative">
-        <Swiper
-          :modules="modules"
-          :slides-per-view="swiperOptions.slidesPerView"
-          :space-between="swiperOptions.spaceBetween"
-          :navigation="swiperOptions.navigation"
-          :breakpoints="swiperOptions.breakpoints"
-          @swiper="onSwiper"
-          @slideChange="onSlideChange"
-        >
-          <SwiperSlide v-for="(item, i) in data.forecast.forecastday" :key="item.date">
-            <div class="slide-content" @click="() => emit('selectIndex', i)">
-              <DayCard
-                :weatherCode="item.day.condition.code || 0"
-                :date="new Date(item.date)"
-                :temp="item.day.avgtemp_c"
-                :isActive="activeIndex === i"
-              />
-            </div>
-          </SwiperSlide>
-        </Swiper>
+      <Swiper
+        :modules="modules"
+        :slides-per-view="swiperOptions.slidesPerView"
+        :space-between="swiperOptions.spaceBetween"
+        :navigation="swiperOptions.navigation"
+        :breakpoints="swiperOptions.breakpoints"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+      >
+        <SwiperSlide v-for="(item, i) in data.forecast.forecastday" :key="item.date">
+          <div class="slide-content" @click="() => emit('selectIndex', i)">
+            <DayCard
+              :weatherCode="item.day.condition.code || 0"
+              :date="new Date(item.date)"
+              :temp="item.day.avgtemp_c"
+              :isActive="activeIndex === i"
+            />
+          </div>
+        </SwiperSlide>
+      </Swiper>
 
-        <!-- Кастомные стрелки ВНУТРИ swiper-wrapper-relative -->
-        <button class="custom-button-prev custom-nav-btn">
+      <!-- Кастомные стрелки (если нужны) -->
+      <div class="custom-navigation">
+        <button class="swiper-button-prev custom-nav-btn">
           <svg
             width="24"
             height="24"
@@ -139,7 +142,7 @@ const onSlideChange = (swiper) => {
             />
           </svg>
         </button>
-        <button class="custom-button-next custom-nav-btn">
+        <button class="swiper-button-next custom-nav-btn">
           <svg
             width="24"
             height="24"
@@ -170,30 +173,37 @@ const onSlideChange = (swiper) => {
   padding: 55px 50px;
   width: 520px;
   position: relative;
-  overflow: hidden;
 }
 
 /* Контейнер для Swiper */
 .swiper-container {
   position: relative;
   margin: 30px 0;
-}
-
-/* Обертка для относительного позиционирования */
-.swiper-wrapper-relative {
-  position: relative;
+  padding: 0 40px;
+  overflow: hidden;
 }
 
 /* Стили для содержимого слайда */
 .slide-content {
+  padding: 5px;
   cursor: pointer;
 }
 
 /* Кастомные стрелки навигации */
-.custom-nav-btn {
+.custom-navigation {
   position: absolute;
   top: 50%;
+  left: 0;
+  right: 0;
   transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.custom-nav-btn {
+  pointer-events: auto;
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -206,31 +216,21 @@ const onSlideChange = (swiper) => {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 10;
 }
 
 .custom-nav-btn:hover {
   background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 
 .custom-nav-btn:active {
-  transform: translateY(-50%) scale(0.95);
+  transform: scale(0.95);
 }
 
-.custom-button-prev {
-  left: -20px;
-}
-
-.custom-button-next {
-  right: -20px;
-}
-
-/* Стиль для неактивных кнопок */
-:deep(.swiper-button-disabled) {
+.custom-nav-btn.swiper-button-disabled {
   opacity: 0.3;
   cursor: not-allowed;
-  transform: translateY(-50%) !important;
+  transform: none !important;
 }
 
 .custom-nav-btn svg {
@@ -258,17 +258,13 @@ const onSlideChange = (swiper) => {
     padding: 30px 15px;
   }
 
+  .swiper-container {
+    padding: 0 30px;
+  }
+
   .custom-nav-btn {
     width: 35px;
     height: 35px;
-  }
-
-  .custom-button-prev {
-    left: -15px;
-  }
-
-  .custom-button-next {
-    right: -15px;
   }
 
   .custom-nav-btn svg {
@@ -277,23 +273,22 @@ const onSlideChange = (swiper) => {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 800px) {
+  .swiper-container {
+    padding: 0 25px;
+  }
+
   .custom-nav-btn {
     width: 30px;
     height: 30px;
   }
 
-  .custom-button-prev {
-    left: -10px;
-  }
-
-  .custom-button-next {
-    right: -10px;
-  }
-
   .custom-nav-btn svg {
     width: 16px;
     height: 16px;
+  }
+  .card {
+    padding: 10px 5px;
   }
 }
 </style>

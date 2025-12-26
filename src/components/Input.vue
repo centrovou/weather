@@ -113,7 +113,7 @@ function selectCity(cityInput) {
   margin-top: 10px;
   border: 1px solid #3a434f;
   z-index: 9999;
-  max-height: 150px;
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
   overflow-y: scroll;

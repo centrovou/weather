@@ -107,8 +107,27 @@ const showIconSleet = computed(
 }
 
 @media (max-width: 800px) {
- .card__temp{
-  font-size: 18px;
- }
+  .card__temp {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 800px) {
+  .swiper-container {
+    padding: 0 25px;
+  }
+
+  .custom-nav-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .custom-nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  .card {
+    padding: 15px 16px;
+  }
 }
 </style>
