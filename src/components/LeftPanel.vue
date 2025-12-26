@@ -9,7 +9,7 @@ import IconRain from '../icons/weather/iconRain.vue';
 import IconCloudSnowSun from '../icons/weather/iconCloud/iconCloudSnowSun.vue';
 import IconCloudSnow from '../icons/weather/iconCloud/iconCloudSnow.vue';
 import IconCloudSnowRain from '../icons/weather/iconCloud/iconCloudSnowRain.vue';
-
+import WeatherEffects from './WeatherEffects.vue'; // или правильный путь
 const forecastStore = useForecastStore();
 
 const { dayData } = defineProps({
@@ -108,7 +108,8 @@ const displayCity = computed(() => {
 //
 const showIconSun = computed(() => weatherCode.value <= 1003);
 const showIconCloud = computed(
-  () => (weatherCode.value > 1003 && weatherCode.value <= 1009) || weatherCode.value === 1030,
+  () =>
+    (weatherCode.value > 1003 && weatherCode.value <= 1009) || weatherCode.value === 1030,
 );
 
 const showIconRain = computed(
@@ -117,18 +118,25 @@ const showIconRain = computed(
     (weatherCode.value >= 1240 && weatherCode.value <= 1246),
 );
 
-const showIconSnowSun = computed(() => weatherCode.value >= 1210 && weatherCode.value <= 1213);
+const showIconSnowSun = computed(
+  () => weatherCode.value >= 1210 && weatherCode.value <= 1213,
+);
 
-const showIconSnow = computed(() => weatherCode.value >= 1216 && weatherCode.value <= 1258);
+const showIconSnow = computed(
+  () => weatherCode.value >= 1216 && weatherCode.value <= 1258,
+);
 
 const showIconSleet = computed(
-  () => weatherCode.value === 1069 || (weatherCode.value >= 1204 && weatherCode.value <= 1207),
+  () =>
+    weatherCode.value === 1069 ||
+    (weatherCode.value >= 1204 && weatherCode.value <= 1207),
 );
 //
 </script>
 
 <template>
   <div class="left__panel">
+    <WeatherEffects :weather-code="weatherCode" />
     <div class="left__top">
       <span class="left__day">{{ day }}</span>
       <span class="left__date">{{ date }}</span>
@@ -160,6 +168,8 @@ const showIconSleet = computed(
   flex-direction: column;
   justify-content: space-between;
   padding: 50px 30px;
+  position: relative; 
+  overflow: hidden; 
 }
 .left__top {
   display: flex;
@@ -243,4 +253,5 @@ const showIconSleet = computed(
     justify-content: center;
   }
 }
+
 </style>
