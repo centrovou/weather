@@ -1,11 +1,14 @@
 <script setup>
-import { computed, inject, onMounted } from 'vue';
+import { computed } from 'vue';
 import iconLocation from '../icons/iconLocation.vue';
 
 import { useForecastStore } from '../stores/forecast.store';
 import IconSun from '../icons/weather/iconSun.vue';
 import IconCloud from '../icons/weather/iconCloud/iconCloud.vue';
 import IconRain from '../icons/weather/iconRain.vue';
+import IconCloudSnowSun from '../icons/weather/iconCloud/iconCloudSnowSun.vue';
+import IconCloudSnow from '../icons/weather/iconCloud/iconCloudSnow.vue';
+import IconCloudSnowRain from '../icons/weather/iconCloud/iconCloudSnowRain.vue';
 
 const forecastStore = useForecastStore();
 
@@ -101,7 +104,27 @@ const temp = computed(() => {
 const displayCity = computed(() => {
   return forecastStore.city || '—';
 });
-const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
+
+//
+const showIconSun = computed(() => weatherCode.value <= 1003);
+const showIconCloud = computed(
+  () => (weatherCode.value > 1003 && weatherCode.value <= 1009) || weatherCode.value === 1030,
+);
+
+const showIconRain = computed(
+  () =>
+    (weatherCode.value >= 1063 && weatherCode.value <= 1198) ||
+    (weatherCode.value >= 1240 && weatherCode.value <= 1246),
+);
+
+const showIconSnowSun = computed(() => weatherCode.value >= 1210 && weatherCode.value <= 1213);
+
+const showIconSnow = computed(() => weatherCode.value >= 1216 && weatherCode.value <= 1258);
+
+const showIconSleet = computed(
+  () => weatherCode.value === 1069 || (weatherCode.value >= 1204 && weatherCode.value <= 1207),
+);
+//
 </script>
 
 <template>
@@ -112,9 +135,12 @@ const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
       <span class="left__city"> <iconLocation /> {{ displayCity }} </span>
     </div>
     <div class="left__buttom">
-      <IconSun v-if="weatherCode <= 1003" :size="95" />
-      <IconCloud v-if="weatherCode > 1003 && weatherCode < 1063" :size="95" />
-      <IconRain v-if="weatherCode >= 1063" :size="95" />
+      <IconSun v-if="showIconSun" :size="95" />
+      <IconCloud v-if="showIconCloud" :size="95" />
+      <IconRain v-if="showIconRain" :size="95" />
+      <IconCloudSnowSun v-if="showIconSnowSun" :size="95" />
+      <IconCloudSnow v-if="showIconSnow" :size="95" />
+      <IconCloudSnowRain v-if="showIconSleet" :size="95" />
 
       <span class="left__temp">{{ temp }}</span>
       <span class="left__info">{{ weatherText }}</span>
@@ -189,7 +215,7 @@ const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
 
 @media (max-width: 800px) {
   .left__panel {
-    height: 385px;
+    height: 430px;
     justify-content: space-between;
     width: 345px;
     display: flex;
@@ -199,22 +225,22 @@ const showIconSnow = computed(() => weatherCode >= 1216 && weatherCode <= 1258);
   .left__info {
     font-size: 20px;
   }
-  .left__buttom{
-   display: flex;
-   align-items: center;
-   text-align: center;
+  .left__buttom {
+    display: flex;
+    align-items: center;
+    text-align: center;
   }
-  .left__city{
-   display: flex;
-   align-items: center;
-   text-align: center;
-   justify-content: center;
+  .left__city {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
-  .left__date{
-   display: flex;
-   align-items: center;
-   text-align: center;
-   justify-content: center;
+  .left__date {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 }
 </style>

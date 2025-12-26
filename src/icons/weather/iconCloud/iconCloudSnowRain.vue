@@ -6,7 +6,7 @@ const { color = 'white', size = 54 } = defineProps({ color: String, size: Number
   <svg
     xmlns="http://www.w3.org/2000/svg"
     :width="size"
-    :height="54"
+    :height="size"
     viewBox="0 0 256 275"
     :fill="color"
   >

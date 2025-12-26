@@ -105,4 +105,10 @@ const showIconSleet = computed(
   background: #fff;
   color: black;
 }
+
+@media (max-width: 800px) {
+ .card__temp{
+  font-size: 18px;
+ }
+}
 </style>

@@ -21,7 +21,7 @@ export const useForecastStore = defineStore('forecast', () => {
       const { data: apiData } = await WEATHER_API.get(API_ROUTES.getForecast, {
         params: {
           q: currentCity,
-          days: 3,
+          days: 6,
         },
       });
       error.value = null;
