@@ -6,7 +6,7 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 export const WEATHER_API = axios.create({
   baseURL: API_ENDPOINT,
   params: {
-    key: API_KEY,
+    key: '99774110a3a7432faa7112131260204',
     lang: 'ru',
   },
 });
